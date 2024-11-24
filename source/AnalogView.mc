@@ -197,9 +197,9 @@ class AnalogView extends WatchUi.WatchFace
             // Garmin Logo check
             var logo=Storage.getValue(3);
             var position = Application.loadResource(Rez.JsonData.mPosition);
-            if (logo == null or logo == true) {
-                MtbA.drawGarminLogo(dc, position[4], position[5]); 
-            }
+            // if (logo == null or logo == true) {
+            //     MtbA.drawGarminLogo(dc, position[4], position[5]); 
+            // }
 
             // Draw the 3, 6, 9, and 12 hour labels.
             if (System.SCREEN_SHAPE_ROUND == System.getDeviceSettings().screenShape and Storage.getValue(5) != false) {
@@ -208,43 +208,43 @@ class AnalogView extends WatchUi.WatchFace
 
             //Draw Weather Icon (dc, x, y, x2, width)
             //if (Toybox has :Weather and Weather has :getCurrentConditions) {
-            if (check[1] and check[2]) {
-                if(Toybox.Weather.getCurrentConditions() != null) {
-                    //var cond = Toybox.Weather.getCurrentConditions();
-                    if (logo==false){ // Hide Garmin Logo
-                        if (Storage.getValue(25)!=false){ // Show current weather condition and temperature
-                            //if (cond.condition!=null and cond.condition instanceof Number){
-                                MtbA.drawWeatherIcon(dc, position[18], position[22], position[19], width);
-                            //}
-                            //Draw Temperature Text
-                            MtbA.drawTemperature(dc, position[21], position[7], Storage.getValue(6), width);
-                        }
-                        //if (cond.observationLocationName!=null){
-                            //Draw Location Name
-                            MtbA.drawLocation(dc, width/2, position[6], width*0.60, dc.getFontHeight(Graphics.FONT_TINY), Storage.getValue(7));
-                        //}
-                    } else { // Show Garmin Logo
-                        if (Storage.getValue(25)!=false){ // Show current weather condition and temperature
-                            //if (cond.condition!=null and cond.condition instanceof Number){
-                                MtbA.drawWeatherIcon(dc, position[18], position[20], position[19], width);
-                            //}
-                            //Draw Temperature Text
-                            MtbA.drawTemperature(dc, position[21], (System.SCREEN_SHAPE_ROUND == System.getDeviceSettings().screenShape)?position[15]:position[20], Storage.getValue(6), width);
-                        }
-                        //if (cond.observationLocationName!=null){
-                            //Draw Location Name
-                            //System.println(dc.getFontHeight(Graphics.FONT_TINY));
-                            MtbA.drawLocation(dc, width/2, position[23], width*0.60, dc.getFontHeight(Graphics.FONT_TINY), Storage.getValue(7));
-                        //}                        
-                    }
-                }
-            }
+            // if (check[1] and check[2]) {
+            //     if(Toybox.Weather.getCurrentConditions() != null) {
+            //         //var cond = Toybox.Weather.getCurrentConditions();
+            //         if (logo==false){ // Hide Garmin Logo
+            //             if (Storage.getValue(25)!=false){ // Show current weather condition and temperature
+            //                 //if (cond.condition!=null and cond.condition instanceof Number){
+            //                     MtbA.drawWeatherIcon(dc, position[18], position[22], position[19], width);
+            //                 //}
+            //                 //Draw Temperature Text
+            //                 MtbA.drawTemperature(dc, position[21], position[7], Storage.getValue(6), width);
+            //             }
+            //             //if (cond.observationLocationName!=null){
+            //                 //Draw Location Name
+            //                 MtbA.drawLocation(dc, width/2, position[6], width*0.60, dc.getFontHeight(Graphics.FONT_TINY), Storage.getValue(7));
+            //             //}
+            //         } else { // Show Garmin Logo
+            //             if (Storage.getValue(25)!=false){ // Show current weather condition and temperature
+            //                 //if (cond.condition!=null and cond.condition instanceof Number){
+            //                     MtbA.drawWeatherIcon(dc, position[18], position[20], position[19], width);
+            //                 //}
+            //                 //Draw Temperature Text
+            //                 MtbA.drawTemperature(dc, position[21], (System.SCREEN_SHAPE_ROUND == System.getDeviceSettings().screenShape)?position[15]:position[20], Storage.getValue(6), width);
+            //             }
+            //             //if (cond.observationLocationName!=null){
+            //                 //Draw Location Name
+            //                 //System.println(dc.getFontHeight(Graphics.FONT_TINY));
+            //                 MtbA.drawLocation(dc, width/2, position[23], width*0.60, dc.getFontHeight(Graphics.FONT_TINY), Storage.getValue(7));
+            //             //}                        
+            //         }
+            //     }
+            // }
             
             // Draw Battery
-            if (Storage.getValue(26)!=false){ // Show Battery Icon
-                MtbA.drawBatteryIcon(dc, width*0.69, height / 2.11, width*0.82, height / 2.06+(width==218 ? 1 : 0), width, height, accentColor);
-                MtbA.drawBatteryText(dc, width*0.76, height / 2.14 - 1, width, check[0]);
-            }
+            // if (Storage.getValue(26)!=false){ // Show Battery Icon
+            //     MtbA.drawBatteryIcon(dc, width*0.69, height / 2.11, width*0.82, height / 2.06+(width==218 ? 1 : 0), width, height, accentColor);
+            //     MtbA.drawBatteryText(dc, width*0.76, height / 2.14 - 1, width, check[0]);
+            // }
 
             //Data Points
             var FontAdj=0;
@@ -312,49 +312,49 @@ class AnalogView extends WatchUi.WatchFace
             }
 
             // Bluetooth, Alarm and Dnd Icons
-            var alarm = Storage.getValue(8), blue = Storage.getValue(4);
-            if (check[4] and System.getDeviceSettings().doNotDisturb) { // Dnd exists and is turned on
-                if ((alarm == true and blue == true) or (alarm == null and blue == null)){ // all 3 icons
-                    // Draw the Do Not Disturb Icon in the middle
-                    MtbA.drawDndIcon(dc, position[0], position[1], width, check[4]);
-                    // Draw alarm icon on the right
-                    MtbA.drawAlarmIcon(dc, position[3], position[1], accentColor, width);
-                    //Draw bluetooth icon on the left
-                    MtbA.drawBluetoothIcon(dc, position[2], position[1]);
-                } else if(alarm == false and (blue == true)) { // alarm icon is hidden
-                    // Draw the Do Not Disturb Icon on the right
-                    MtbA.drawDndIcon(dc, (position[0]+position[3])/2, position[1], width, check[4]);
-                    //Draw bluetooth icon on the left
-                    MtbA.drawBluetoothIcon(dc, (position[2]+position[0])/2, position[1]);
-                } else if(alarm == true and blue == false){ // bluetooth icon is hidden
-                    // Draw the Do Not Disturb Icon on the left
-                    MtbA.drawDndIcon(dc, (position[3]+position[0])/2, position[1], width, check[4]);
-                    // Draw alarm icon on the right
-                    MtbA.drawAlarmIcon(dc, (position[0]+position[2])/2, position[1], accentColor, width);                    
-                } else{ // only Dnd
-                    // Draw the Do Not Disturb Icon in the middle
-                    MtbA.drawDndIcon(dc, position[0], position[1], width, check[4]);
-                }
-            } else { // Dnd does not exist or is turned off
-                if ((alarm == true or alarm == null) and (blue == true or blue == null)){ // all 2 icons
-                    // Draw alarm icon on the right
-                    //MtbA.drawAlarmIcon(dc, (position[3]+(position[3]+position[0])/2)/2, position[1], accentColor, width);
-                    MtbA.drawAlarmIcon(dc, ((position[3]+position[0])/2)+iconSize, position[1], accentColor, width);
-                    //Draw bluetooth icon on the left
-                    MtbA.drawBluetoothIcon(dc, (position[2]+position[0])/2, position[1]);
-                } else if(alarm == false and (blue == true)){ // alarm icon is hidden
-                    MtbA.drawBluetoothIcon(dc, (width/2)-1, position[1]);
-                } else if(alarm == true){
-                    MtbA.drawAlarmIcon(dc, width/2, position[1], accentColor, width);
-                }
-            }
+            // var alarm = Storage.getValue(8), blue = Storage.getValue(4);
+            // if (check[4] and System.getDeviceSettings().doNotDisturb) { // Dnd exists and is turned on
+            //     if ((alarm == true and blue == true) or (alarm == null and blue == null)){ // all 3 icons
+            //         // Draw the Do Not Disturb Icon in the middle
+            //         MtbA.drawDndIcon(dc, position[0], position[1], width, check[4]);
+            //         // Draw alarm icon on the right
+            //         MtbA.drawAlarmIcon(dc, position[3], position[1], accentColor, width);
+            //         //Draw bluetooth icon on the left
+            //         MtbA.drawBluetoothIcon(dc, position[2], position[1]);
+            //     } else if(alarm == false and (blue == true)) { // alarm icon is hidden
+            //         // Draw the Do Not Disturb Icon on the right
+            //         MtbA.drawDndIcon(dc, (position[0]+position[3])/2, position[1], width, check[4]);
+            //         //Draw bluetooth icon on the left
+            //         MtbA.drawBluetoothIcon(dc, (position[2]+position[0])/2, position[1]);
+            //     } else if(alarm == true and blue == false){ // bluetooth icon is hidden
+            //         // Draw the Do Not Disturb Icon on the left
+            //         MtbA.drawDndIcon(dc, (position[3]+position[0])/2, position[1], width, check[4]);
+            //         // Draw alarm icon on the right
+            //         MtbA.drawAlarmIcon(dc, (position[0]+position[2])/2, position[1], accentColor, width);                    
+            //     } else{ // only Dnd
+            //         // Draw the Do Not Disturb Icon in the middle
+            //         MtbA.drawDndIcon(dc, position[0], position[1], width, check[4]);
+            //     }
+            // } else { // Dnd does not exist or is turned off
+            //     if ((alarm == true or alarm == null) and (blue == true or blue == null)){ // all 2 icons
+            //         // Draw alarm icon on the right
+            //         //MtbA.drawAlarmIcon(dc, (position[3]+(position[3]+position[0])/2)/2, position[1], accentColor, width);
+            //         MtbA.drawAlarmIcon(dc, ((position[3]+position[0])/2)+iconSize, position[1], accentColor, width);
+            //         //Draw bluetooth icon on the left
+            //         MtbA.drawBluetoothIcon(dc, (position[2]+position[0])/2, position[1]);
+            //     } else if(alarm == false and (blue == true)){ // alarm icon is hidden
+            //         MtbA.drawBluetoothIcon(dc, (width/2)-1, position[1]);
+            //     } else if(alarm == true){
+            //         MtbA.drawAlarmIcon(dc, width/2, position[1], accentColor, width);
+            //     }
+            // }
 
             //Draw the date string
-            if (logo == null or logo == true) { // Garmin Logo check
-                MtbA.drawDateString( dc, width / 2, position[6] ); 
-            } else { // No Garmin Logo
-                MtbA.drawDateString( dc, width / 2, position[5] + (width<=240 ? 5 : 0 ) + (width==218 ? 3 : 0 )); // offsets needed because of size of Garmin Logo compared to Date Font
-            }
+            // if (logo == null or logo == true) { // Garmin Logo check
+            //     MtbA.drawDateString( dc, width / 2, position[6] ); 
+            // } else { // No Garmin Logo
+            //     MtbA.drawDateString( dc, width / 2, position[5] + (width<=240 ? 5 : 0 ) + (width==218 ? 3 : 0 )); // offsets needed because of size of Garmin Logo compared to Date Font
+            // }
 
         } 
         

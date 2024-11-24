@@ -1,5 +1,5 @@
 <resources>
-    <string id="AppName">MoveToBeActive</string>
+    <string id="AppName">NN WatchFace</string>
     <string id="HomeTitle">Settings</string>
     <string id="MainMenuTitle">Main Menu</string>
     <string id="Prompt">Long press the menu\nbutton to start</string>
